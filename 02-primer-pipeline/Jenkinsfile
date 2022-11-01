@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('docker build') {
+            steps {
+                script {
+                    bat "docker build -f 02-primer-pipeline/Dockerfile -t caosbinario/homer_page:1.0.0-${BUILD_ID} 02-primer-pipeline"
+                }
+            }
+        }
+        stage('docker push') {
+            steps {
+                script {            
+                    bat "docker push caosbinario/homer_page:1.0.0-${BUILD_ID}"
+                }
+            }
+        }
+    }
+}
